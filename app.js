@@ -1,13 +1,14 @@
-var express = require('express');
+var express = require('express')
 var app = express();
-var swig = require('swig')
-
 var port = 3000;
+var swig = require('swig')
 
 //take out this line after completion for better performance
 swig.setDefaults({ cache: false });
 
 app.engine('html', swig.renderFile);
+
+
 app.set('view engine', "html" );
 app.set('views', __dirname + "/views");
 app.use(function(req,res,next){
@@ -27,6 +28,7 @@ app.get("/",function(req,res){
 			res.send(output);
 		});
 });
+
 
 app.listen(port,function(){
 	console.log("Listening on port " + port);
