@@ -2,9 +2,11 @@ var _ = require('underscore');
 var data = [];
 
 var tweetFunctions = {
-
+	tweetCounter: 0,
 	add: function (name, text){
-		data.push({name: name, text: text});
+		data.push({name: name, text: text,id: tweetFunctions.tweetCounter});
+		tweetFunctions.tweetCounter++;
+
 	},
 
 	list: function(){
@@ -38,4 +40,15 @@ for(var i=0; i<10; i++) {
  module.exports.add( getFakeName(), getFakeTweet() );
 }
 
-tweetFunctions.add("Joe","Hi");
+tweetFunctions.add("Joe","Hi1");
+
+tweetFunctions.add("Joe","Hi2");
+
+tweetFunctions.add("Joe","Hi3");
+
+tweetFunctions.add("Joe","Hi4");
+
+tweetFunctions.add("Joe","Hi5");
+
+tweetFunctions.add("Joe","Hi6");
+

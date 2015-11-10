@@ -14,10 +14,23 @@ router.use(function(req,res,next){
 	next();
 });
 
+router.get('/users/:name/tweets/:id',function(req,res){
+	var userName = (req.params.name);
+	var userTweets = tweetBank.find({name: userName})
+	var tweetId = parseInt(req.params.id);
+	var specificTweet = tweetBank.find({id: tweetId});
+
+	console.log(tweetId);
+	res.render("index",{title: 'Twitter.js - Posts by ' + userName,tweets: specificTweet});
+	
+});
+
 router.get('/users/:name',function(req,res){
 	var userName = (req.params.name);
 	var userTweets = tweetBank.find({name: userName})
+	//console.log(userTweets)
 	res.render("index",{title: 'Twitter.js - Posts by ' + userName,tweets: userTweets});
+
 	
 });
 
@@ -27,6 +40,13 @@ router.get('/',function(req,res){
 
 //{title: 'Twitter.js', tweets: tweets}
 });
+
+router.get('/post',function(req,res){
+
+
+	
+})
+
 
 
 
