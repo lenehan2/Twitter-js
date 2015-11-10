@@ -10,7 +10,15 @@ var tweetBank = require('../tweetBank');
 router.use(function(req,res,next){
 	console.log("Request verb: " + req.method)
 	console.log("Response Status Code: "+ res.statusCode)
+	//console.log(tweetBank.list())
 	next();
+});
+
+router.get('/users/:name',function(req,res){
+	var userName = (req.params.name);
+	var userTweets = tweetBank.find({name: userName})
+	res.render("index",{title: 'Twitter.js - Posts by ' + userName,tweets: userTweets});
+	
 });
 
 router.get('/',function(req,res){

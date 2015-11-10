@@ -65,3 +65,17 @@ code {
   font-weight: bold;
 
 }
+
+#tweetList{
+  list-style-type: none;
+  /*list-style-image: url("https://alwaysquilting.files.wordpress.com/2012/07/smiley-face-small.jpg");*/
+  /*background-color: green;*/
+}
+
+.ul {
+
+  background-color: red;
+
+}
+
+

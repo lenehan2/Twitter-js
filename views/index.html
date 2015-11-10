@@ -12,10 +12,10 @@
       100 followers
     </div>
     <div class="col-md-9">
-    
+    	<h3>{{title}}</h3>
       <!-- display tweets here -->
       {% for tweet in tweets %}
-        <li>
+        <li id="tweetList">
         	<h5 id= "name"> {{tweet.name}}</h5>
         	<p id ="message"> {{tweet.text}}</p>	
         </li>
