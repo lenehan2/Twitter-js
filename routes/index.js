@@ -1,32 +1,37 @@
-var swig = require('swig')
-var express = require('express')
+var express = require('express');
 var router = express.Router();
-
-swig.setDefaults({ cache: false });
-
-app.engine('html', swig.renderFile);
+var tweetBank = require('../tweetBank');
 
 
-app.set('view engine', "html" );
-app.set('views', __dirname + "/views");
-app.use(function(req,res,next){
+
+// static file middleware
+
+
+router.use(function(req,res,next){
 	console.log("Request verb: " + req.method)
 	console.log("Response Status Code: "+ res.statusCode)
 	next();
 });
 
-app.get("/",function(req,res){
-	var testObj = {
+router.get('/',function(req,res){
+	var tweets = tweetBank.list();
+	res.render('index', {title: "Twitter.js",tweets: tweets});
 
-	title: "An Example",
-	people: [{age: 54, name: "Gandalf"},{name: "Frodo"},{name: "Hermione"}]
-	}
-	res.render("index", testObj, function(err,output){
-			if(err) throw err;
-			res.send(output);
-		});
+//{title: 'Twitter.js', tweets: tweets}
 });
 
 
-module.exports = router;
 
+// router.get("/",function(req,res){
+// 	var testObj = {
+
+// 	title: "An Example",
+// 	people: [{age: 54, name: "Gandalf"},{name: "Frodo"},{name: "Hermione"}]
+// 	}
+// 	res.render("index", testObj, function(err,output){
+// 			if(err) throw err;
+// 			res.send(output);
+// 		});
+// });
+
+module.exports = router;

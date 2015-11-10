@@ -1,0 +1,30 @@
+
+<head>
+
+<link href = "../public/stylesheets/style.css" rel = "stylesheet" type ="text/css" >
+
+</head>
+<div id="wrap">
+
+	<h1>{{ title }}</h1>
+
+
+	<p>All the tweets.</p>
+	<div class="tweetbox">
+		<ul>
+			{% for tweet in tweets %}
+
+		  <li>{{ tweet.name + ": " + tweet.text }}</li>
+			{% endfor %}
+		</ul>
+	</div>
+
+</div>
+<!-- <h1>{{ pagename|title }}</h1>
+<ul>
+{% for author in authors %}
+  <li{% if loop.first %} class="first"{% endif %}>
+    {{ author }}
+  </li>
+{% endfor %}
+</ul> -->

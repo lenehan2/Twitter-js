@@ -2,32 +2,32 @@ var express = require('express')
 var app = express();
 var port = 3000;
 var swig = require('swig')
+var routes = require('./routes/');
+var mime = require('mime');
+var fs = require('fs')
+
+
+app.engine('html', swig.renderFile);
+app.set('view engine', "html" );
+app.set('views', __dirname + "/views");
 
 //take out this line after completion for better performance
 swig.setDefaults({ cache: false });
 
-app.engine('html', swig.renderFile);
+//Index Route//
 
 
-app.set('view engine', "html" );
-app.set('views', __dirname + "/views");
-app.use(function(req,res,next){
-	console.log("Request verb: " + req.method)
-	console.log("Response Status Code: "+ res.statusCode)
-	next();
-});
+app.use(function(req, res, next) {
+  console.log(req.path)
+  var mimeType = mime.lookup(req.path)
+  fs.readFile('./public/' + req.path, function(err, fileBuffer) {
+    if(err) return next()
+    res.header('Content-Type', mimeType)
+    res.send(fileBuffer)
+  })
+})
 
-app.get("/",function(req,res){
-	var testObj = {
-
-	title: "An Example",
-	people: [{age: 54, name: "Gandalf"},{name: "Frodo"},{name: "Hermione"}]
-	}
-	res.render("index", testObj, function(err,output){
-			if(err) throw err;
-			res.send(output);
-		});
-});
+app.use('/',routes);
 
 
 app.listen(port,function(){
